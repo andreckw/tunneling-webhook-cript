@@ -1,0 +1,45 @@
+{% extends "app.html" %}
+
+{% block conteudo %}
+    <div class="card">
+
+        <div class="card-header pl-5 pt-5">
+            <h1 class="is-title">
+                Envio de mensagem
+            </h1>
+        </div>
+
+        <form action="#" id="enviar-form" method="get">
+            <div class="card-content">
+                <div class="content">
+                    <div class="field">
+                        <p class="control is-expanded">
+                            <textarea class="textarea" id="msg" placeholder="Digite sua mensagem"></textarea>
+                        </p>
+
+                        <p class="control">
+                            <button type="button" class="button is-primary" onclick="enviarMsg()">
+                                Enviar
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function enviarMsg() {
+
+        let form = document.getElementById("enviar-form");
+        let msg = document.getElementById("msg").value;
+
+        fetch("{{ url_for('enviar') }}?msg="+msg, {
+            method: "GET",
+        });
+    }
+</script>
+{% endblock %}

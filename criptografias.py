@@ -264,6 +264,11 @@ class RSA():
         
         while ((self.d * self.e) % self.totiente_n != 1) and self.d < self.totiente_n:
             self.d += 1
+        
+        return {
+            "private_key": f"{self.e}, {self.n}",
+            "public_key": f"{self.d}, {self.n}"
+        }
 
     
     def criptografar(self, texto, chave):
@@ -285,13 +290,11 @@ class RSA():
         return retorno
     
     
-    def descriptografar(self, texto):
+    def descriptografar(self, texto, chaves):
         
-        with open("chave_privada.txt") as f:
-            chave = f.read()
-            chaves = chave.split(",")
-            d = int(chaves[0])
-            n = int(chaves[1])
+        chaves = chaves.split(",")
+        d = int(chaves[0])
+        n = int(chaves[1])
         
         texto = texto.split(",")
         
@@ -300,6 +303,7 @@ class RSA():
         i = 0
         for t in texto:
             print(f"descriptografando: {i/len(texto)*100}%", end="\r")
+            t = t.replace("\x00", "")
             m = (int(t) ** d) % n
             texto_descript += chr(m)
             i+=1
@@ -392,7 +396,6 @@ class Base64():
             bits += format(elem, "06b")
         
         bits = bits + "000000"*padding
-        print(bits)
         
         texto = bytearray()
         for i in range(0, len(bits), 8):

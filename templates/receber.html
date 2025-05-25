@@ -1,0 +1,35 @@
+{% extends "app.html" %}
+
+{% block meta %}
+<meta http-equiv="refresh" content="25">
+{% endblock %}
+
+{% block conteudo %}
+    <div class="card">
+
+        <div class="card-header pl-5 pt-5">
+            <h1 class="is-title">
+                Receber mensagem
+            </h1>
+        </div>
+
+        <form action="#" id="enviar-form" method="get">
+            <div class="card-content">
+                <div class="content">
+                    <div class="field">
+                        <p class="control is-expanded">
+                            <textarea class="textarea" id="msg">{{ msg }}</textarea>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    
+</script>
+{% endblock %}
