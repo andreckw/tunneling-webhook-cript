@@ -274,18 +274,16 @@ class RSA():
     def criptografar(self, texto, chave):
         chaves = chave.split(",")
         
-        self.e = int(chaves[0])
-        self.n = int(chaves[1])
+        e = int(chaves[0])
+        n = int(chaves[1])
         
         ascii = self._transformar_em_ascii(texto)
         retorno = ""
         
         for m in ascii:
-            retorno += f"{(m ** self.e) % self.n},"
+            retorno += f"{(m ** e) % n},"
         
         retorno = retorno[:len(retorno) - 1]
-        
-        self.texto_criptografado = retorno
         
         return retorno
     

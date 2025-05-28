@@ -12,17 +12,58 @@
 </head>
 
 <body>
-    <div class="content block">
-        <section class="section">
-            {% block conteudo %}
-        
-            {% endblock %}
-        </section>
-    </div>
+    <header>
+        {%if (conectado)%}
+            Conectado
+        {%else%}
+            <form action="{{ url_for('conectar') }}" method="post">
+                <button class="button">
+                    Conectar
+                </button>
+            </form>
+        {%endif%}
+    </header>
+    <section class="content section">
+        <div class="columns">
+            <div class="column"></div>
 
-    {% block js %}
+            <div class="column">
+                <div class="box">
+                    {% for m in msgs %}
+                        <div class="block">
+                            {{ m }}
+                        </div>
+                    {%endfor%}
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input type="text" id="msg" class="input" placeholder="Digite sua mensagem">
+                    </div>
+                    <div class="control">
+                        <button class="button is-success" onclick="enviarMsg()">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column"></div>
+        </div>
+    </section>
+
+    <script>
+        function enviarMsg() {
     
-    {% endblock %}
+            let form = document.getElementById("enviar-form");
+            let msg = document.getElementById("msg").value;
+    
+            fetch("{{ url_for('enviar') }}?msg="+msg, {
+                method: "GET",
+            });
+
+            location.reload();
+        }
+    </script>
 </body>
 
 </html>
