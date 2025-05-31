@@ -16,6 +16,12 @@ def index():
     return render_template("app.html", msgs=msgs, conectado=conectado)
 
 
+@app.route("/mensagens", methods=["GET"])
+def mensagens():
+    global msgs
+    
+    return render_template("mensagens.html", msgs=msgs)
+
 @app.route("/conectar", methods=["POST"])
 def conectar():
     global my_key_private, conectado

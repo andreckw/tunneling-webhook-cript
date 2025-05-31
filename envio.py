@@ -12,9 +12,15 @@ conectado = False
 
 @app.route("/", methods=["GET"])
 def index():
-    global msgs
-    return render_template("app.html", msgs=msgs, conectado=conectado)
+    global conectado
+    return render_template("app.html", conectado=conectado)
 
+
+@app.route("/mensagens", methods=["GET"])
+def mensagens():
+    global msgs
+    
+    return render_template("mensagens.html", msgs=msgs)
 
 @app.route("/conectar", methods=["POST"])
 def conectar():

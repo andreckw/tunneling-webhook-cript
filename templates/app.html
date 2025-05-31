@@ -29,11 +29,9 @@
 
             <div class="column">
                 <div class="box">
-                    {% for m in msgs %}
-                        <div class="block">
-                            {{ m }}
-                        </div>
-                    {%endfor%}
+                    <iframe class="has-ratio" id="iframe-msg" width="1280" height="720" src="{{ url_for('mensagens') }}" frameborder="0">
+                        
+                    </iframe>
                 </div>
                 <div class="field has-addons">
                     <div class="control is-expanded">
@@ -63,6 +61,13 @@
 
             location.reload();
         }
+
+        function recarregarMsgs() {
+            let iframe = document.getElementById("iframe-msg");
+            iframe.src = "{{ url_for('mensagens') }}";
+        }
+
+        setInterval(recarregarMsgs, 2000)
     </script>
 </body>
 
