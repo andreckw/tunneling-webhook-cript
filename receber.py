@@ -52,6 +52,8 @@ def enviar():
     # Faz o Hash do Base64 em SHA256
     msg_hash = SHA256(msg_base)
     msg_hash = msg_hash.criptografar()
+    print(f"Msg original: {msg}")
+    print(f"Msg cript: {msg_rs}")
 
     # Envia a mensagem criptografada e o Hash
     requests.post(f"{url_base}/receber", json={
